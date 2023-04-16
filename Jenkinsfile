@@ -53,7 +53,7 @@ pipeline{
         }
 
         // Stage 5 : Publish the artifacts to Nexus
-        stage () {
+        stage ('Publish to Nexus') {
             steps {
                 nexusArtifactUploader artifacts: 
                 [[artifactId: 'VinayDevOpsLab', 
