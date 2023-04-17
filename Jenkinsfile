@@ -74,10 +74,21 @@ pipeline{
             }
         }
 
-         // Stage 6 : Deploying
+        // Stage 6 : Deploying
         stage ('Deploy'){
             steps {
                 echo ' deploying......'
+                sshPublisher(publishers: 
+                [sshPublisherDesc(configName: 'Ansible_Control', 
+                    transfers: [sshTransfer(
+                        cleanRemote: false, 
+                        execCommand: 'ansible-playbook /opt/ansible/download-deploy.yml -i /opt/ansible/hosts', 
+                        execTimeout: 120000, 
+                    )], 
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)
+                    ])
 
             }
         }
